@@ -21,6 +21,7 @@ function Copyright(props: any) {
       variant="body2"
       color="text.secondary"
       align="center"
+      sx={{ marginBottom: "50px" }}
       {...props}
     >
       {"Copyright © "}
