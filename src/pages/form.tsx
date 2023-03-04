@@ -12,7 +12,7 @@ export default function BasicTable() {
   const [rows, setRows] = React.useState<any[]>();
   React.useEffect(() => {
     const getData = async () => {
-      setRows(await (await axios.get("http://localhost:8000/form")).data);
+      setRows(await (await axios.get("https://customersback.vercel.app/form")).data);
     };
     getData();
   }, []);
@@ -34,9 +34,9 @@ export default function BasicTable() {
         <TableBody>
           {rows &&
             rows.length &&
-            rows.map((row) => (
+            rows.map((row, index) => (
               <TableRow
-                key={row.name}
+                key={row.name + index}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">

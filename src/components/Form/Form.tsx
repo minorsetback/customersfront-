@@ -13,6 +13,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 function Copyright(props: any) {
   return (
@@ -36,9 +37,9 @@ const theme = createTheme();
 
 export default function Form() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+
     const data = new FormData(event.currentTarget);
-    await axios.post("http://localhost:8000/form/create", {
+    await axios.post("https://customersback.vercel.app/form/create", {
       name: data.get("name"),
       email: data.get("email"),
       descriprion: data.get("descriprion"),
@@ -141,7 +142,7 @@ export default function Form() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              SEND
             </Button>
           </Box>
         </Box>
