@@ -40,8 +40,7 @@ export default function Form() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    await axios.post("http://localhost:8000/form/create", {
-      //https://customersback.vercel.app
+    await axios.post("https://customersback.vercel.app/form/create", {
       name: data.get("name"),
       email: data.get("email"),
       descriprion: data.get("descriprion"),
