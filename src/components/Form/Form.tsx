@@ -36,10 +36,12 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function Form() {
+  const router = useRouter();
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-
+    event.preventDefault();
     const data = new FormData(event.currentTarget);
-    await axios.post("https://customersback.vercel.app/form/create", {
+    await axios.post("http://localhost:8000/form/create", {
+      //https://customersback.vercel.app
       name: data.get("name"),
       email: data.get("email"),
       descriprion: data.get("descriprion"),
@@ -47,6 +49,7 @@ export default function Form() {
       amount: data.get("amount"),
       design: !!data.get("design"),
     });
+    router.reload();
   };
 
   return (
@@ -69,6 +72,7 @@ export default function Form() {
           </Typography>
           <Box
             component="form"
+            id="form"
             noValidate
             onSubmit={handleSubmit}
             sx={{ mt: 3 }}
