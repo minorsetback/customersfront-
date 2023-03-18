@@ -7,23 +7,29 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import axios from "axios";
+import { CircularProgress } from "@mui/material";
 
 export default function BasicTable() {
   const [rows, setRows] = React.useState<any[]>();
   const [pass, setPass] = React.useState<string | null>();
+  const [loading, setLoading] = React.useState(false);
+
   React.useEffect(() => {
     setPass(prompt("Password:"));
 
     const getData = async () => {
+      setLoading(true);
       setRows(
         await (
           await axios.get("https://customersback.vercel.app/form")
         ).data
       );
+      setLoading(false);
     };
     getData();
   }, []);
 
+  
   if (pass === "root") {
     return (
       <TableContainer component={Paper}>
@@ -38,25 +44,36 @@ export default function BasicTable() {
               <TableCell>Have Design</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
-            {rows &&
-              rows.length &&
-              rows.map((row, index) => (
-                <TableRow
-                  key={row.name + index}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    {row.name}
-                  </TableCell>
-                  <TableCell>{row.email}</TableCell>
-                  <TableCell>{row.descriprion}</TableCell>
-                  <TableCell>{row.amount}</TableCell>
-                  <TableCell>{row.stack}</TableCell>
-                  <TableCell>{String(row.design)}</TableCell>
-                </TableRow>
-              ))}
-          </TableBody>
+          {loading ? (
+            <CircularProgress
+              sx={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "transition(-50%, -50%)",
+              }}
+            />
+          ) : (
+            <TableBody>
+              {rows &&
+                rows.length &&
+                rows.reverse().map((row, index) => (
+                  <TableRow
+                    key={row.name + index}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {row.name}
+                    </TableCell>
+                    <TableCell>{row.email}</TableCell>
+                    <TableCell>{row.descriprion}</TableCell>
+                    <TableCell>{row.amount}</TableCell>
+                    <TableCell>{row.stack}</TableCell>
+                    <TableCell>{String(row.design)}</TableCell>
+                  </TableRow>
+                ))}
+            </TableBody>
+          )}
         </Table>
       </TableContainer>
     );

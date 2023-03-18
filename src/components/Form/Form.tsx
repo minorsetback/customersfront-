@@ -14,6 +14,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { Alert, IconButton, Snackbar } from "@mui/material";
 
 function Copyright(props: any) {
   return (
@@ -37,23 +38,53 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function Form() {
-  const router = useRouter();
+  const [open, setOpen] = React.useState(false);
+  const [data, setData] = React.useState({
+    name: "",
+    email: "",
+    descriprion: "",
+    stack: "",
+    amount: "",
+    design: false,
+  });
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (
+    event: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
     await axios.post("https://customersback.vercel.app/form/create", {
-      name: data.get("name"),
-      email: data.get("email"),
-      descriprion: data.get("descriprion"),
-      stack: data.get("stack"),
-      amount: data.get("amount"),
-      design: !!data.get("design"),
+      ...data,
     });
-    router.reload();
+
+    setData({
+      name: "",
+      email: "",
+      descriprion: "",
+      stack: "",
+      amount: "",
+      design: false,
+    });
   };
 
   return (
     <ThemeProvider theme={theme}>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+          Form submitted successfully
+        </Alert>
+      </Snackbar>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -86,6 +117,10 @@ export default function Form() {
                   label="Name"
                   name="name"
                   autoComplete="name"
+                  value={data.name}
+                  onChange={(e) => {
+                    setData({ ...data, name: e.target.value });
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -96,6 +131,10 @@ export default function Form() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  value={data.email}
+                  onChange={(e) => {
+                    setData({ ...data, email: e.target.value });
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -106,6 +145,11 @@ export default function Form() {
                   id="descriprion"
                   label="Describe your project"
                   name="descriprion"
+                  autoComplete="email"
+                  value={data.descriprion}
+                  onChange={(e) => {
+                    setData({ ...data, descriprion: e.target.value });
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -115,6 +159,10 @@ export default function Form() {
                   id="stack"
                   label="Preferred stack"
                   name="stack"
+                  value={data.stack}
+                  onChange={(e) => {
+                    setData({ ...data, stack: e.target.value });
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -124,6 +172,10 @@ export default function Form() {
                   id="amount"
                   label="What amount do you expect"
                   name="amount"
+                  value={data.amount}
+                  onChange={(e) => {
+                    setData({ ...data, amount: e.target.value });
+                  }}
                 />
               </Grid>
             </Grid>
@@ -133,8 +185,11 @@ export default function Form() {
                   <Checkbox
                     id="design"
                     name="design"
-                    value={true}
                     color="primary"
+                    value={data.design}
+                    onChange={(e) => {
+                      setData({ ...data, design: e.target.checked });
+                    }}
                   />
                 }
                 label="Do you have design ?"
@@ -144,6 +199,7 @@ export default function Form() {
               type="submit"
               fullWidth
               variant="contained"
+              onClick={handleClick}
               sx={{ mt: 3, mb: 2 }}
             >
               SEND
