@@ -29,7 +29,6 @@ export default function BasicTable() {
     getData();
   }, []);
 
-  
   if (pass === "root") {
     return (
       <TableContainer component={Paper}>
@@ -40,7 +39,14 @@ export default function BasicTable() {
               <TableCell>Email</TableCell>
               <TableCell>Desc</TableCell>
               <TableCell>Amount</TableCell>
-              <TableCell>Stack</TableCell>
+              <TableCell>Kind of activity</TableCell>
+              <TableCell>Target audience</TableCell>
+              <TableCell>Basic colors</TableCell>
+              <TableCell>Keywords</TableCell>
+              <TableCell>Recommendations for site structure</TableCell>
+              <TableCell>References</TableCell>
+              <TableCell>Competitors</TableCell>
+              <TableCell>Integrations</TableCell>
               <TableCell>Have Design</TableCell>
             </TableRow>
           </TableHead>
@@ -68,7 +74,16 @@ export default function BasicTable() {
                     <TableCell>{row.email}</TableCell>
                     <TableCell>{row.descriprion}</TableCell>
                     <TableCell>{row.amount}</TableCell>
-                    <TableCell>{row.stack}</TableCell>
+                    <TableCell>{row.kind_of_activity}</TableCell>
+                    <TableCell>{row.target_audience}</TableCell>
+                    <TableCell>{row.basic_colors}</TableCell>
+                    <TableCell>{row.keywords}</TableCell>
+                    <TableCell>
+                      {row.recommendations_for_site_structure}
+                    </TableCell>
+                    <TableCell>{row.references}</TableCell>
+                    <TableCell>{row.competitors}</TableCell>
+                    <TableCell>{row.integrations}</TableCell>
                     <TableCell>{String(row.design)}</TableCell>
                   </TableRow>
                 ))}

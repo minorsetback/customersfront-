@@ -43,8 +43,15 @@ export default function Form() {
     name: "",
     email: "",
     descriprion: "",
-    stack: "",
     amount: "",
+    kind_of_activity: "",
+    target_audience: "",
+    basic_colors: "",
+    keywords: "",
+    recommendations_for_site_structure: "",
+    references: "",
+    competitors: "",
+    integrations: "",
     design: false,
   });
   const handleClick = () => {
@@ -72,8 +79,15 @@ export default function Form() {
       name: "",
       email: "",
       descriprion: "",
-      stack: "",
       amount: "",
+      kind_of_activity: "",
+      target_audience: "",
+      basic_colors: "",
+      keywords: "",
+      recommendations_for_site_structure: "",
+      references: "",
+      competitors: "",
+      integrations: "",
       design: false,
     });
   };
@@ -156,12 +170,12 @@ export default function Form() {
                 <TextField
                   multiline
                   fullWidth
-                  id="stack"
-                  label="Preferred stack"
-                  name="stack"
-                  value={data.stack}
+                  id="amount"
+                  label="What amount do you expect"
+                  name="amount"
+                  value={data.amount}
                   onChange={(e) => {
-                    setData({ ...data, stack: e.target.value });
+                    setData({ ...data, amount: e.target.value });
                   }}
                 />
               </Grid>
@@ -169,12 +183,103 @@ export default function Form() {
                 <TextField
                   multiline
                   fullWidth
-                  id="amount"
-                  label="What amount do you expect"
-                  name="amount"
-                  value={data.amount}
+                  id="kind_of_activity"
+                  label="Kind of activity"
+                  name="kind_of_activity"
+                  value={data.kind_of_activity}
                   onChange={(e) => {
-                    setData({ ...data, amount: e.target.value });
+                    setData({ ...data, kind_of_activity: e.target.value });
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  multiline
+                  fullWidth
+                  id="target_audience"
+                  label="Target audiencet"
+                  name="target_audience"
+                  value={data.target_audience}
+                  onChange={(e) => {
+                    setData({ ...data, target_audience: e.target.value });
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  multiline
+                  fullWidth
+                  id="basic_colors"
+                  label="Basic colors"
+                  name="basic_colors"
+                  value={data.basic_colors}
+                  onChange={(e) => {
+                    setData({ ...data, basic_colors: e.target.value });
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  multiline
+                  fullWidth
+                  id="keywords"
+                  label="Keywords"
+                  name="keywords"
+                  value={data.keywords}
+                  onChange={(e) => {
+                    setData({ ...data, keywords: e.target.value });
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  multiline
+                  fullWidth
+                  id="recommendations_for_site_structure"
+                  label="Recommendations for site structure"
+                  name="recommendations_for_site_structure"
+                  value={data.recommendations_for_site_structure}
+                  onChange={(e) => {
+                    setData({ ...data, recommendations_for_site_structure: e.target.value });
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  multiline
+                  fullWidth
+                  id="references"
+                  label="References"
+                  name="references"
+                  value={data.references}
+                  onChange={(e) => {
+                    setData({ ...data, references: e.target.value });
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  multiline
+                  fullWidth
+                  id="competitors"
+                  label="Competitors"
+                  name="competitors"
+                  value={data.competitors}
+                  onChange={(e) => {
+                    setData({ ...data, competitors: e.target.value });
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  multiline
+                  fullWidth
+                  id="integrations"
+                  label="Integrations"
+                  name="integrations"
+                  value={data.integrations}
+                  onChange={(e) => {
+                    setData({ ...data, integrations: e.target.value });
                   }}
                 />
               </Grid>
